@@ -70,7 +70,7 @@ public final class MainActivity extends AppCompatActivity
     setSupportActionBar(binding.toolbar);
 
     // Set the activity title
-    setTitle("Find Restauarants");
+    setTitle("Find Restaurants");
   }
 
   /*

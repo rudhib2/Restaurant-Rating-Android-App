@@ -3,6 +3,7 @@ package edu.illinois.cs.cs124.ay2021.mp.models;
 import androidx.annotation.NonNull;
 import com.github.wrdlbrnft.sortedlistadapter.SortedListAdapter;
 import java.util.Comparator;
+import java.util.List;
 
 /*
  * Model storing information about a restaurant retrieved from the restaurant server.
@@ -17,13 +18,28 @@ public final class Restaurant implements SortedListAdapter.ViewModel {
   // Name of the restaurant
   private String name;
 
-  // Getter for the name
+
+
+    // Getter for the name
   public String getName() {
     return name;
   }
 
-  // You will need to add more fields here...
+  // Name of the cuisine
+  private String cuisine;
 
+
+
+  // Getter for the cuisine
+  public String getCuisine() {
+
+    return cuisine;
+  }
+
+  // You will need to add more fields here...
+  public static List<Restaurant> search(final List<Restaurant> restaurants, final String search) {
+    return restaurants;
+  }
   /*
    * The Jackson JSON serialization library we are using requires an empty constructor.
    * So don't remove this!

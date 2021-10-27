@@ -52,7 +52,7 @@ public final class Restaurant implements SortedListAdapter.ViewModel {
    * Comparator is like Comparable, except it defines one possible ordering, not a canonical ordering for a class,
    * and so is implemented as a separate method rather than directly by the class as is done with Comparable.
    */
-  public static final Comparator<Restaurant> SORT_BY_NAME = ((restaurant1, restaurant2) -> 0);
+  public static final Comparator<Restaurant> SORT_BY_NAME = ((restaurant1, restaurant2) -> restaurant1.getName().compareTo(restaurant2.getName()));
 
   // You should not need to modify this code, which is used by the list adapter component
   @Override

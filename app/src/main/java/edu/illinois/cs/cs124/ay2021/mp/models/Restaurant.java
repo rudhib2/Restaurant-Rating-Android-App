@@ -18,17 +18,13 @@ public final class Restaurant implements SortedListAdapter.ViewModel {
   // Name of the restaurant
   private String name;
 
-
-
-    // Getter for the name
+  // Getter for the name
   public String getName() {
     return name;
   }
 
   // Name of the cuisine
   private String cuisine;
-
-
 
   // Getter for the cuisine
   public String getCuisine() {
@@ -52,7 +48,8 @@ public final class Restaurant implements SortedListAdapter.ViewModel {
    * Comparator is like Comparable, except it defines one possible ordering, not a canonical ordering for a class,
    * and so is implemented as a separate method rather than directly by the class as is done with Comparable.
    */
-  public static final Comparator<Restaurant> SORT_BY_NAME = ((restaurant1, restaurant2) -> restaurant1.getName().compareTo(restaurant2.getName()));
+  public static final Comparator<Restaurant> SORT_BY_NAME =
+      ((restaurant1, restaurant2) -> restaurant1.getName().compareTo(restaurant2.getName()));
 
   // You should not need to modify this code, which is used by the list adapter component
   @Override

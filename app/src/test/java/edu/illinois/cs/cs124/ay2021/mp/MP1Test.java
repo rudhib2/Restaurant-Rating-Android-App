@@ -35,7 +35,6 @@ import okhttp3.Response;
 import okhttp3.ResponseBody;
 import org.apache.http.HttpStatus;
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.experimental.runners.Enclosed;
 import org.junit.runner.RunWith;
@@ -125,7 +124,7 @@ public final class MP1Test {
     // THIS TEST SHOULD NOT WORK INITIALLY
     // To enable it, remove or comment out the @Ignore annotation below
     // This test checks to make sure that you are parsing the right fields from the node JSON
-    @Ignore("Enable once you begin working on search")
+    // @Ignore("Enable once you begin working on search")
     @Test(timeout = 1000L)
     public void testLoadRestaurantFields() throws IOException {
       // Build a GET request for /restaurants

@@ -4,7 +4,7 @@ import androidx.annotation.NonNull;
 import com.github.wrdlbrnft.sortedlistadapter.SortedListAdapter;
 import java.util.Comparator;
 import java.util.List;
-
+import java.util.ArrayList;
 /*
  * Model storing information about a restaurant retrieved from the restaurant server.
  *
@@ -34,7 +34,23 @@ public final class Restaurant implements SortedListAdapter.ViewModel {
 
   // You will need to add more fields here...
   public static List<Restaurant> search(final List<Restaurant> restaurants, final String search) {
-    return restaurants;
+    List<Restaurant> toReturn = new ArrayList<>();
+    if (restaurants == null || search == null) {
+      throw new IllegalArgumentException();
+    }
+    if (search.length() == 0) {
+      return restaurants;
+    }
+    for (int i = 0; i < restaurants.size(); i++) {
+      if (restaurants.get(i).getName().toLowerCase().trim().contains(search.toLowerCase().trim())) {
+        toReturn.add(restaurants.get(i));
+      } else if (restaurants.get(i).getName().toLowerCase().trim().contains(search.toLowerCase().trim())
+      || restaurants.get(i).getCuisine().toLowerCase().trim().contains(search.toLowerCase().trim())) {
+        toReturn.add(restaurants.get(i));
+      }
+    }
+
+    return toReturn;
   }
   /*
    * The Jackson JSON serialization library we are using requires an empty constructor.

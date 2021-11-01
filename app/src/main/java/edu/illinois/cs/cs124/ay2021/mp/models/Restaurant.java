@@ -38,18 +38,34 @@ public final class Restaurant implements SortedListAdapter.ViewModel {
     if (restaurants == null || search == null) {
       throw new IllegalArgumentException();
     }
-    if (search.length() == 0) {
-      return restaurants;
+    String s = search.toLowerCase().trim();
+    List<Restaurant> k = new ArrayList<>();
+    if(s.length() == 0) {
+      for (int i = 0; i < restaurants.size(); i++) {
+        k.add(restaurants.get(i));
+      }
+      return k;
     }
+    int count = 0;
+    String a;
+    String b;
     for (int i = 0; i < restaurants.size(); i++) {
-      if (restaurants.get(i).getName().toLowerCase().trim().contains(search.toLowerCase().trim())) {
+      a = restaurants.get(i).cuisine.toLowerCase().trim();
+      b = restaurants.get(i).name.toLowerCase().trim();
+      if (a.equals(s)) {
         toReturn.add(restaurants.get(i));
-      } else if (restaurants.get(i).getName().toLowerCase().trim().contains(search.toLowerCase().trim())
-      || restaurants.get(i).getCuisine().toLowerCase().trim().contains(search.toLowerCase().trim())) {
-        toReturn.add(restaurants.get(i));
+        count += 1;
       }
     }
-
+    if (count == 0) {
+      for (int i = 0; i < restaurants.size(); i++) {
+        a = restaurants.get(i).cuisine.toLowerCase().trim();
+        b = restaurants.get(i).name.toLowerCase().trim();
+        if (a.contains(s) || b.contains(s)) {
+          toReturn.add(restaurants.get(i));
+        }
+      }
+    }
     return toReturn;
   }
   /*

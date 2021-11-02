@@ -40,7 +40,7 @@ public final class Restaurant implements SortedListAdapter.ViewModel {
     }
     String s = search.toLowerCase().trim();
     List<Restaurant> k = new ArrayList<>();
-    if(s.length() == 0) {
+    if (s.length() == 0) {
       for (int i = 0; i < restaurants.size(); i++) {
         k.add(restaurants.get(i));
       }

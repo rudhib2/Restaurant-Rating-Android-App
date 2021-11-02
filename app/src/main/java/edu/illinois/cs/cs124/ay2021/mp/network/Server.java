@@ -115,9 +115,9 @@ public final class Server extends Dispatcher {
     ArrayNode restaurants = JsonNodeFactory.instance.arrayNode();
     for (String[] parts : csvReader) {
       ObjectNode restaurant = JsonNodeFactory.instance.objectNode();
-      restaurant.put("id",parts[0]);
+      restaurant.put("id", parts[0]);
       restaurant.put("name", parts[1]);
-      restaurant.put("cuisine",parts[2]);
+      restaurant.put("cuisine", parts[2]);
       restaurant.put("url", parts[3]);
       restaurants.add(restaurant);
     }

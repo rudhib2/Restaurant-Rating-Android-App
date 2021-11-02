@@ -2,9 +2,10 @@ package edu.illinois.cs.cs124.ay2021.mp.models;
 
 import androidx.annotation.NonNull;
 import com.github.wrdlbrnft.sortedlistadapter.SortedListAdapter;
+import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
-import java.util.ArrayList;
+
 /*
  * Model storing information about a restaurant retrieved from the restaurant server.
  *
@@ -72,7 +73,7 @@ public final class Restaurant implements SortedListAdapter.ViewModel {
    * The Jackson JSON serialization library we are using requires an empty constructor.
    * So don't remove this!
    */
-  public Restaurant() {}
+  public Restaurant() { }
 
   /*
    * Function to compare Restaurant instances by name.

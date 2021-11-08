@@ -10,6 +10,8 @@ import edu.illinois.cs.cs124.ay2021.mp.adapters.RestaurantListAdapter;
 import edu.illinois.cs.cs124.ay2021.mp.application.EatableApplication;
 import edu.illinois.cs.cs124.ay2021.mp.databinding.ActivityMainBinding;
 import edu.illinois.cs.cs124.ay2021.mp.models.Restaurant;
+import java.util.List;
+import java.util.function.Consumer;
 
 /*
  * App main activity.
@@ -32,6 +34,7 @@ public final class MainActivity extends AppCompatActivity
 
   // Reference to the persistent Application instance
   private EatableApplication application;
+  private List<Restaurant> newList;
 
   /*
    * onCreate is the first method called when this activity is created.
@@ -53,14 +56,13 @@ public final class MainActivity extends AppCompatActivity
     // Grab a reference to our application instance and use it to fetch the list of restaurants from
     // the server
     application = (EatableApplication) getApplication();
-    application
-        .getClient()
-        /*
-         * What is passed to getRestaurants is a callback, which we'll discuss in more detail in the MP lessons.
-         * Callbacks allow us to wait for something to complete and run code when it does.
-         * In this case, once we retrieve a list of restaurants, we use it to update the contents of our list.
-         */
-        .getRestaurants((restaurants -> listAdapter.edit().replaceAll(restaurants).commit()));
+    Consumer<List<Restaurant>> anonymousClass = new Consumer<List<Restaurant>>() {
+      public void accept(final List<Restaurant> restaurants) {
+        newList = restaurants;
+        listAdapter.edit().replaceAll(restaurants).commit();
+      }
+    };
+    application.getClient().getRestaurants(anonymousClass);
 
     // Bind to the search component so that we can receive events when the contents of the search
     // box change
@@ -79,9 +81,9 @@ public final class MainActivity extends AppCompatActivity
    */
   @Override
   public boolean onQueryTextChange(final String query) {
+    listAdapter.edit().replaceAll(Restaurant.search(newList, query)).commit();
     return true;
   }
-
   /*
    * Called when the user clicks on one of the restaurants in the list.
    * Eventually (MP2) we'll launch a new activity here so they can see the restaurant details.

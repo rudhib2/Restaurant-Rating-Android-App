@@ -33,7 +33,9 @@ public final class Restaurant implements SortedListAdapter.ViewModel {
     return cuisine;
   }
   private String id;
-  public String getId() { return id; }
+  public String getId() {
+    return id;
+  }
 
   // You will need to add more fields here...
   public static List<Restaurant> search(final List<Restaurant> restaurants, final String search) {

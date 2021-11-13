@@ -4,10 +4,10 @@ import java.util.List;
 import java.util.Map;
 
 public class RelatedRestaurants {
-    public RelatedRestaurants(final List<Restaurant> restaurants, final List<Preference> preferences) {
+  public RelatedRestaurants(final List<Restaurant> restaurants, final List<Preference> preferences) {
 
-    }
-    public Map<String, Integer> getRelated(final String restaurantID) {
-        return null;
-    }
+  }
+  public Map<String, Integer> getRelated(final String restaurantID) {
+    return null;
+  }
 }

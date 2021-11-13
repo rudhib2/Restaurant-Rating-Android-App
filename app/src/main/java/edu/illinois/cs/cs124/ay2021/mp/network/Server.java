@@ -124,6 +124,10 @@ public final class Server extends Dispatcher {
     return restaurants.toPrettyString();
   }
 
+  public static String loadPreferences() {
+    return null;
+  }
+
   // Number of restaurants that we expect to find in the CSV file
   // Normally this wouldn't be hardcoded but it's useful for testing
   public static final int RESTAURANT_COUNT = 255;

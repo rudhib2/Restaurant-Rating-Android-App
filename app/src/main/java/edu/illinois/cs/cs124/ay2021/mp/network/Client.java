@@ -16,6 +16,7 @@ import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import edu.illinois.cs.cs124.ay2021.mp.application.EatableApplication;
+import edu.illinois.cs.cs124.ay2021.mp.models.Preference;
 import edu.illinois.cs.cs124.ay2021.mp.models.Restaurant;
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
@@ -89,6 +90,10 @@ public final class Client {
             });
     // Actually queue and run the request
     requestQueue.add(restaurantsRequest);
+  }
+
+  public void getPreferences(final Consumer<List<Preference>> callback) {
+    callback.accept(null);
   }
 
   /*

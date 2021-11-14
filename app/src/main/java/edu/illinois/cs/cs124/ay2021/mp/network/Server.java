@@ -125,7 +125,25 @@ public final class Server extends Dispatcher {
   }
 
   public static String loadPreferences() {
-    return null;
+    String input =
+            new Scanner(Server.class.getResourceAsStream("/preferences.csv"), "UTF-8")
+                    .useDelimiter("\\A")
+                    .next();
+    ArrayNode preferences = JsonNodeFactory.instance.arrayNode();
+    // input -> for loop to access the lines
+    for (String lines : input.split("\n")) {
+      String[] values = lines.trim().split(",");
+      ObjectNode node = JsonNodeFactory.instance.objectNode();
+      node.put("id", values[0]);
+      ArrayNode array = JsonNodeFactory.instance.arrayNode();
+      for (int i = 1; i < values.length; i++) {
+        array.add(values[i]);
+      }
+      node.replace("restaurantIDs", array);
+      preferences.add(node);
+    }
+
+    return preferences.toPrettyString();
   }
 
   // Number of restaurants that we expect to find in the CSV file

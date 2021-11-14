@@ -93,7 +93,25 @@ public final class Client {
   }
 
   public void getPreferences(final Consumer<List<Preference>> callback) {
-    callback.accept(null);
+    StringRequest preferencesRequest =
+            new StringRequest(
+                    Request.Method.GET,
+                    EatableApplication.SERVER_URL + "preferences/",
+                    response -> {
+                      try {
+                        List<Preference> preferences =
+                                objectMapper.readValue(response, new TypeReference<>() {});
+                        callback.accept(preferences);
+                      } catch (Exception e) {
+                        Log.e(TAG, e.toString());
+                        callback.accept(null);
+                      }
+                    },
+                    error -> {
+                      Log.e(TAG, error.toString());
+                      callback.accept(null);
+                    });
+    requestQueue.add(preferencesRequest);
   }
 
   /*

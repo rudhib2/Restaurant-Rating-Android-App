@@ -1,6 +1,8 @@
 package edu.illinois.cs.cs124.ay2021.mp.activities;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.SearchView;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;
@@ -56,12 +58,13 @@ public final class MainActivity extends AppCompatActivity
     // Grab a reference to our application instance and use it to fetch the list of restaurants from
     // the server
     application = (EatableApplication) getApplication();
-    Consumer<List<Restaurant>> anonymousClass = new Consumer<List<Restaurant>>() {
-      public void accept(final List<Restaurant> restaurants) {
-        newList = restaurants;
-        listAdapter.edit().replaceAll(restaurants).commit();
-      }
-    };
+    Consumer<List<Restaurant>> anonymousClass =
+        new Consumer<List<Restaurant>>() {
+          public void accept(final List<Restaurant> restaurants) {
+            newList = restaurants;
+            listAdapter.edit().replaceAll(restaurants).commit();
+          }
+        };
     application.getClient().getRestaurants(anonymousClass);
 
     // Bind to the search component so that we can receive events when the contents of the search
@@ -89,7 +92,13 @@ public final class MainActivity extends AppCompatActivity
    * Eventually (MP2) we'll launch a new activity here so they can see the restaurant details.
    */
   @Override
-  public void onClicked(final Restaurant restaurant) {}
+  public void onClicked(final Restaurant restaurant) {
+    Log.d("MainActivity", restaurant.getId());
+    Intent startRestaurant = new Intent(this, RestaurantActivity.class);
+    startRestaurant.putExtra("name ", restaurant.getName());
+    startRestaurant.putExtra("cuisine", restaurant.getCuisine());
+    startActivity(startRestaurant);
+  }
 
   /*
    * Called when the user submits their search query.
@@ -99,4 +108,7 @@ public final class MainActivity extends AppCompatActivity
   public boolean onQueryTextSubmit(final String unused) {
     return true;
   }
+
+  @Override
+  public void onPointerCaptureChanged(final boolean hasCapture) {}
 }

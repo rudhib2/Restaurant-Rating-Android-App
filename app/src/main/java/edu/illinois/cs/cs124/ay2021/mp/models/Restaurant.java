@@ -32,7 +32,9 @@ public final class Restaurant implements SortedListAdapter.ViewModel {
 
     return cuisine;
   }
+
   private String id;
+
   public String getId() {
     return id;
   }
@@ -77,7 +79,7 @@ public final class Restaurant implements SortedListAdapter.ViewModel {
    * The Jackson JSON serialization library we are using requires an empty constructor.
    * So don't remove this!
    */
-  public Restaurant() { }
+  public Restaurant() {}
 
   /*
    * Function to compare Restaurant instances by name.

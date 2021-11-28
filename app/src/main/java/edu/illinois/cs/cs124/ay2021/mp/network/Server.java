@@ -61,16 +61,16 @@ public final class Server extends Dispatcher {
 
   private MockResponse getPreferences() {
     return new MockResponse()
-            // Indicate that the request succeeded (HTTP 200 OK)
-            .setResponseCode(HttpURLConnection.HTTP_OK)
-            // Load the JSON string with restaurant information into the body of the response
-            .setBody(preferencesJson)
-            /*
-             * Set the HTTP header that indicates that this is JSON with the utf-8 charset.
-             * There are some special characters in our data set, so it's important to mark it as utf-8 so it is parsed
-             * properly by clients.
-             */
-            .setHeader("Content-Type", "application/json; charset=utf-8");
+        // Indicate that the request succeeded (HTTP 200 OK)
+        .setResponseCode(HttpURLConnection.HTTP_OK)
+        // Load the JSON string with restaurant information into the body of the response
+        .setBody(preferencesJson)
+        /*
+         * Set the HTTP header that indicates that this is JSON with the utf-8 charset.
+         * There are some special characters in our data set, so it's important to mark it as utf-8 so it is parsed
+         * properly by clients.
+         */
+        .setHeader("Content-Type", "application/json; charset=utf-8");
   }
 
   /*
@@ -144,9 +144,9 @@ public final class Server extends Dispatcher {
 
   public static String loadPreferences() {
     String input =
-            new Scanner(Server.class.getResourceAsStream("/preferences.csv"), "UTF-8")
-                    .useDelimiter("\\A")
-                    .next();
+        new Scanner(Server.class.getResourceAsStream("/preferences.csv"), "UTF-8")
+            .useDelimiter("\\A")
+            .next();
     ArrayNode preferences = JsonNodeFactory.instance.arrayNode();
     // input -> for loop to access the lines
     for (String lines : input.split("\n")) {

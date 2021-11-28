@@ -23,7 +23,9 @@ import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.concurrent.Executors;
 import java.util.function.Consumer;
 import java.util.stream.Collectors;
@@ -44,6 +46,12 @@ public final class Client {
   // We are using the Jackson JSON serialization library to deserialize data from the server
   private final ObjectMapper objectMapper =
       new ObjectMapper().configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
+
+  private Map<String, Restaurant> restaurantMap = new HashMap<>();
+
+  public Restaurant covertIdToRestaurant(final String searchId) {
+    return restaurantMap.get(searchId);
+  }
 
   /*
    * Retrieve and deserialize a list of restaurants from the backend server.
@@ -71,7 +79,13 @@ public final class Client {
                  * correct type.
                  */
                 List<Restaurant> restaurants =
-                    objectMapper.readValue(response, new TypeReference<>() {});
+                    objectMapper.readValue(response, new TypeReference<>() {
+
+                    });
+
+                for(Restaurant restaurant : restaurants) {
+                  restaurantMap.put(restaurant.getId(), restaurant);
+                }
                 // Call the callback method and pass it the list of restaurants
                 callback.accept(restaurants);
               } catch (Exception e) {
@@ -94,23 +108,23 @@ public final class Client {
 
   public void getPreferences(final Consumer<List<Preference>> callback) {
     StringRequest preferencesRequest =
-            new StringRequest(
-                    Request.Method.GET,
-                    EatableApplication.SERVER_URL + "preferences/",
-                    response -> {
-                      try {
-                        List<Preference> preferences =
-                                objectMapper.readValue(response, new TypeReference<>() {});
-                        callback.accept(preferences);
-                      } catch (Exception e) {
-                        Log.e(TAG, e.toString());
-                        callback.accept(null);
-                      }
-                    },
-                    error -> {
-                      Log.e(TAG, error.toString());
-                      callback.accept(null);
-                    });
+        new StringRequest(
+            Request.Method.GET,
+            EatableApplication.SERVER_URL + "preferences/",
+            response -> {
+              try {
+                List<Preference> preferences =
+                    objectMapper.readValue(response, new TypeReference<>() {});
+                callback.accept(preferences);
+              } catch (Exception e) {
+                Log.e(TAG, e.toString());
+                callback.accept(null);
+              }
+            },
+            error -> {
+              Log.e(TAG, error.toString());
+              callback.accept(null);
+            });
     requestQueue.add(preferencesRequest);
   }
 

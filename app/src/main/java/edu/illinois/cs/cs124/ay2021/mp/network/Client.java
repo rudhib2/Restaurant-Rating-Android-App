@@ -79,11 +79,9 @@ public final class Client {
                  * correct type.
                  */
                 List<Restaurant> restaurants =
-                    objectMapper.readValue(response, new TypeReference<>() {
+                    objectMapper.readValue(response, new TypeReference<>() {});
 
-                    });
-
-                for(Restaurant restaurant : restaurants) {
+                for (Restaurant restaurant : restaurants) {
                   restaurantMap.put(restaurant.getId(), restaurant);
                 }
                 // Call the callback method and pass it the list of restaurants

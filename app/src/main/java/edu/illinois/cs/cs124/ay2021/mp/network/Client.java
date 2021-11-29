@@ -49,8 +49,6 @@ public final class Client {
 
   private Map<String, Restaurant> restaurantMap = new HashMap<>();
 
-
-
   /*
    * Retrieve and deserialize a list of restaurants from the backend server.
    * Takes as an argument a callback method to call when the request completes which will be passed the deserialized

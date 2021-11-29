@@ -26,9 +26,7 @@ public class RestaurantActivity extends AppCompatActivity {
     Intent startedIntent = getIntent();
     String restaurantId = startedIntent.getStringExtra("id");
 
-
     Restaurant r = application.getClient().convertIdToRestaurant(restaurantId);
-
 
     binding = DataBindingUtil.setContentView(this, R.layout.activity_restaurant);
     binding.name.setText(r.getName());

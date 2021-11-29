@@ -95,7 +95,7 @@ public final class MainActivity extends AppCompatActivity
   public void onClicked(final Restaurant restaurant) {
     Log.d("MainActivity", restaurant.getId());
     Intent startRestaurant = new Intent(this, RestaurantActivity.class);
-    startRestaurant.putExtra("name ", restaurant.getName());
+    startRestaurant.putExtra("id ", restaurant.getId());
     startRestaurant.putExtra("cuisine", restaurant.getCuisine());
     startActivity(startRestaurant);
   }

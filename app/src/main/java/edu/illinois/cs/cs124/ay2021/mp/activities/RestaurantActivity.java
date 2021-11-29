@@ -24,13 +24,14 @@ public class RestaurantActivity extends AppCompatActivity {
     application = (EatableApplication) getApplication();
 
     Intent startedIntent = getIntent();
-    String restaurantName = startedIntent.getStringExtra("name");
-    String restaurantCuisine = startedIntent.getStringExtra("cuisine");
+    String restaurantId = startedIntent.getStringExtra("id");
 
-    Bundle restaurantTags = startedIntent.getExtras();
+
+    Restaurant r = application.getClient().convertIdToRestaurant(restaurantId);
+
 
     binding = DataBindingUtil.setContentView(this, R.layout.activity_restaurant);
-    binding.name.setText(restaurantName);
-    binding.cuisine.setText(restaurantCuisine);
+    binding.name.setText(r.getName());
+    binding.cuisine.setText(r.getCuisine());
   }
 }

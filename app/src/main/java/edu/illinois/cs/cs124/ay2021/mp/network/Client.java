@@ -49,9 +49,7 @@ public final class Client {
 
   private Map<String, Restaurant> restaurantMap = new HashMap<>();
 
-  public Restaurant covertIdToRestaurant(final String searchId) {
-    return restaurantMap.get(searchId);
-  }
+
 
   /*
    * Retrieve and deserialize a list of restaurants from the backend server.
@@ -207,5 +205,9 @@ public final class Client {
               }
             })
         .start();
+  }
+
+  public Restaurant convertIdToRestaurant(final String restaurantId) {
+    return restaurantMap.get(restaurantId);
   }
 }

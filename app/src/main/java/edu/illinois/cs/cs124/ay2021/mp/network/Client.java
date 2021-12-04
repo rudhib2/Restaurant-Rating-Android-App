@@ -49,7 +49,6 @@ public final class Client {
 
   private Map<String, Restaurant> restaurantMap = new HashMap<>();
 
-
   public Restaurant convertIdToRestaurant(final String searchId) {
     return restaurantMap.get(searchId);
   }

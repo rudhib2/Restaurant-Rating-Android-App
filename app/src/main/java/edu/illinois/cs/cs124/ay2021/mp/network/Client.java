@@ -49,6 +49,10 @@ public final class Client {
 
   private Map<String, Restaurant> restaurantMap = new HashMap<>();
 
+
+  public Restaurant convertIdToRestaurant(final String searchId) {
+    return restaurantMap.get(searchId);
+  }
   /*
    * Retrieve and deserialize a list of restaurants from the backend server.
    * Takes as an argument a callback method to call when the request completes which will be passed the deserialized
@@ -203,9 +207,5 @@ public final class Client {
               }
             })
         .start();
-  }
-
-  public Restaurant convertIdToRestaurant(final String restaurantId) {
-    return restaurantMap.get(restaurantId);
   }
 }

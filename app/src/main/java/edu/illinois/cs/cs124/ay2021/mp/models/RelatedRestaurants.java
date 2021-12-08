@@ -105,7 +105,7 @@ public class RelatedRestaurants {
     for (String id : mergedSet) {
       toReturn.add(restaurantToId.get(id));
     }
-
+    toReturn.remove(restaurantToId.get(restaurantId));
     return toReturn;
   }
 

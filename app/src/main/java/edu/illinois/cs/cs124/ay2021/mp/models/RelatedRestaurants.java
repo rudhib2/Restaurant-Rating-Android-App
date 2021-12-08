@@ -16,13 +16,16 @@ public class RelatedRestaurants {
 
   private List<String> validIDs = new ArrayList<>();
   private List<Restaurant> restaurantList = new ArrayList<>();
+  private Map<String, Restaurant> restaurantToId = new HashMap<>();
 
   public RelatedRestaurants(
       final List<Restaurant> restaurants, final List<Preference> preferences) {
     for (Restaurant res : restaurants) {
       validIDs.add(res.getId());
       restaurantList.add(res);
+      restaurantToId.put(res.getId(), res);
     }
+
     for (Restaurant restaurant : restaurants) {
       Map<String, Integer> restaurantPreferenceMap = new HashMap<>();
       for (Preference preference : preferences) {
@@ -84,7 +87,45 @@ public class RelatedRestaurants {
         });
     return listNowRelated;
   }
-  public Set<Restaurant> getConnectedTo(final String restaurantID) {
-    return new HashSet<>();
+
+  public Set<Restaurant> getConnectedTo(final String restaurantId) {
+
+    if (restaurantId == null || !(validIDs.contains(restaurantId))) {
+      throw new IllegalArgumentException();
+    }
+    Set<String> mergedSet = new HashSet<>();
+    Set<String> fixedSet = new HashSet<>();
+    fixedSet.addAll(toHelp(restaurantId));
+    mergedSet.addAll(toHelp(restaurantId));
+
+    for (String restaurant : fixedSet) {
+      mergedSet.addAll(toHelp(restaurant));
+    }
+    Set<Restaurant> toReturn = new HashSet<>();
+    for (String id : mergedSet) {
+      toReturn.add(restaurantToId.get(id));
+    }
+
+    return toReturn;
+  }
+
+  private Set<String> toHelp(final String restaurantId) {
+    // return set of one hop restaurant ids in which weight is > 1
+    Map<String, Integer> mapRelated = getRelated(restaurantId);
+    Set<String> keySet = new HashSet<String>(mapRelated.keySet());
+    if (restaurantId == null) {
+      throw new IllegalArgumentException();
+    }
+
+    // create new set of keys of map
+    Set<String> relRestaurants = new HashSet<>();
+    for (String restaurant : keySet) {
+      if (mapRelated.get(restaurant) > 1) {
+        relRestaurants.add(restaurant);
+      }
+    }
+    // for loop-  check for weight of each restaurant
+    // add resulting restaurants to set
+    return relRestaurants;
   }
 }

@@ -80,6 +80,18 @@ public final class Restaurant implements SortedListAdapter.ViewModel {
    * So don't remove this!
    */
   public Restaurant() {}
+  @Override
+  public boolean equals(final Object o) {
+    if (!(o instanceof Restaurant)) {
+      return false;
+    }
+    Restaurant other = (Restaurant) o;
+    return id.equals(other.getId());
+  }
+  @Override
+  public int hashCode() {
+    return id.hashCode();
+  }
 
   /*
    * Function to compare Restaurant instances by name.

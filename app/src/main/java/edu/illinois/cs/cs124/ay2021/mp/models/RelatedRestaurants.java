@@ -103,16 +103,19 @@ public class RelatedRestaurants {
     }
     Set<Restaurant> toReturn = new HashSet<>();
     for (String id : mergedSet) {
+      if (id.equals(restaurantId)) {
+        continue;
+      }
       toReturn.add(restaurantToId.get(id));
     }
-    toReturn.remove(restaurantToId.get(restaurantId));
+    //toReturn.remove(restaurantToId.get(restaurantId));
     return toReturn;
   }
 
   private Set<String> toHelp(final String restaurantId) {
     // return set of one hop restaurant ids in which weight is > 1
     Map<String, Integer> mapRelated = getRelated(restaurantId);
-    Set<String> keySet = new HashSet<String>(mapRelated.keySet());
+    Set<String> keySet = mapRelated.keySet();
     if (restaurantId == null) {
       throw new IllegalArgumentException();
     }
